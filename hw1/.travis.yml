@@ -1,0 +1,41 @@
+language: c
+
+os:
+  - linux
+
+dist: focal
+
+compiler:
+  - gcc
+
+install:
+  - sudo apt update
+  - sudo apt-get install --yes valgrind
+  - sudo apt-get install --yes cmake
+  - sudo apt-get install --yes libgtest-dev
+  - sudo apt-get install --yes cppcheck
+  - sudo apt-get install --yes gcovr
+  - sudo apt-get install --yes python3
+  - sudo apt-get install --yes python3-pip
+  - sudo pip install cpplint
+  - cd /usr/src/gtest
+  - sudo cmake CMakeLists.txt
+  - sudo make
+  - cd -
+
+before_script:
+  - cmake -B build
+  - make -C build
+
+
+jobs:
+  include:
+    - stage: "Test"
+      script:
+        - build/test_hw
+        - valgrind --tool=memcheck --leak-check=full --leak-resolution=med --error-exitcode=1 --track-origins=yes --log-file="logs/valgrindLog.txt" build/test_hw
+        - gcovr -f Weather.c --html-details -o logs/test_result.html
+    - stage: "CheckCode"
+      script:
+        - cppcheck --inconclusive --enable=all --error-exitcode=1 --check-config -q -v --suppress=missingIncludeSystem .
+        - cpplint --recursive --extensions=c,cpp,h --filter="-legal/copyright,-build/include_what_you_use" *.c *.h *.cpp
