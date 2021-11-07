@@ -1,0 +1,36 @@
+Text: "../texts/verybigfile.txt"
+The number of "ga": 244462 
+The number of "ma": 244882 
+The number of "ke": 246232 
+The number of "mb": 244991 
+Time-run of the program: 14 
+--------------------------------
+Text: "../texts/bigfile.txt"
+The number of "ga": 24871 
+The number of "ma": 24504 
+The number of "ke": 24353 
+The number of "mb": 24562 
+Time-run of the program: 1 
+--------------------------------
+Text: "../texts/verybigfile.txt"
+The number of "ga": 244462 
+The number of "ma": 244882 
+The number of "ke": 246232 
+The number of "mb": 244991 
+The number of "ff": 249913 
+The number of "wqw": 3815 
+The number of "ssd": 3958 
+The number of "gg": 250128 
+Time-run of the program: 28 
+--------------------------------
+Text: "../texts/bigfile.txt"
+The number of "ga": 24871 
+The number of "ma": 24504 
+The number of "ke": 24353 
+The number of "mb": 24562 
+The number of "ff": 24765 
+The number of "wqw": 369 
+The number of "ssd": 409 
+The number of "gg": 25266 
+Time-run of the program: 2 
+--------------------------------

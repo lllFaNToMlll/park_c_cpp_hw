@@ -1,0 +1,7 @@
+verybigfile (1GB) ga ma ke mb:
+multi_process ~10 sec
+one_process ~17 sec
+
+verybigfile (1GB) ga ma ke mb ad rr wq of aj lad rrr aws fasff gewfw asfgt ewee:
+multi_process ~30 sec
+one_process ~68 sec
