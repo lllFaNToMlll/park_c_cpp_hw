@@ -58,4 +58,4 @@ jobs:
         - build/multi_process.out texts/bigfile.txt ga ma ke mb >> logs/stressTestsLogs/multiProcess.txt
         - build/multi_process.out texts/verybigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/multiProcess.txt
         - build/multi_process.out texts/bigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/multiProcess.txt
-        - diff logs/stressTestsLogs/oneProcess.txt logs/stressTestsLogs/multiProcess.txt >> logs/stressTestsLogs/diffResult.txt
+        - diff logs/stressTestsLogs/oneProcess.txt logs/stressTestsLogs/multiProcess.txt
