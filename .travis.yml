@@ -1,0 +1,61 @@
+language: c
+
+os:
+  - linux
+
+dist: focal
+
+compiler:
+  - gcc
+
+install:
+  - sudo apt update
+  - sudo apt-get install --yes valgrind
+  - sudo apt-get install --yes cmake
+  - sudo apt-get install --yes libgtest-dev
+  - sudo apt-get install --yes cppcheck
+  - sudo apt-get install --yes gcovr
+  - sudo apt-get install --yes python3
+  - sudo apt-get install --yes python3-pip
+  - sudo pip install cpplint
+  - cd /usr/src/gtest
+  - sudo cmake CMakeLists.txt
+  - sudo make
+  - cd -
+
+before_script:
+  - cmake -B build
+  - make -C build
+
+
+jobs:
+  include:
+    - stage: "TestCodeStyle"
+      script:
+        - cppcheck --inconclusive --enable=all --error-exitcode=1 --check-config -q -v --suppress=missingInclude .
+        - cpplint --recursive --extensions=c,cpp,h --filter="-legal/copyright,-build/include_what_you_use,-readability/casting,-runtime/printf,-runtime/arrays" sources/ headers/ tests/
+    - stage: "TestsTestMemoryAndGcovr"
+      script:
+        - cmake -B build -DTEST_SEQUENCE=1 -DCMAKE_BUILD_TYPE=Debug
+        - make -C build
+        - build/test_oneProcess
+        - build/test_multiProcess
+        - valgrind --tool=memcheck --leak-check=full --leak-resolution=med --error-exitcode=1 --track-origins=yes --log-file="logs/valgrindLogs/valgrindLogOneProcess.txt" build/one_process.out
+        - valgrind --tool=memcheck --leak-check=full --leak-resolution=med --error-exitcode=1 --track-origins=yes --log-file="logs/valgrindLogs/valgrindLogMultiProcess.txt" build/multi_process.out
+        - gcovr -e sources/findAllSequenceMultiProcess.c -e sources/main.c -e tests/test_multiProcess.cpp --exclude-unreachable-branches --exclude-throw-branches --html-details -o logs/gcovrLogs/oneProcess/test_oneProcess.html
+        - gcovr -e sources/findAllSequenceOneProcess.c -e sources/main.c -e tests/test_oneProcess.cpp --exclude-unreachable-branches --exclude-throw-branches --html-details -o logs/gcovrLogs/multiProcess/test_multiProcess.html
+    - stage: "StressTest"
+      script:
+        - cd texts
+        - chmod +x textMaker.sh
+        - sh textMaker.sh
+        - cd ..
+        - build/one_process.out texts/verybigfile.txt ga ma ke mb >> logs/stressTestsLogs/oneProcessCI.txt
+        - build/one_process.out texts/bigfile.txt ga ma ke mb >> logs/stressTestsLogs/oneProcessCI.txt
+        - build/one_process.out texts/verybigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/oneProcessCI.txt
+        - build/one_process.out texts/bigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/oneProcessCI.txt
+        - build/multi_process.out texts/verybigfile.txt ga ma ke mb >> logs/stressTestsLogs/multiProcessCI.txt
+        - build/multi_process.out texts/bigfile.txt ga ma ke mb >> logs/stressTestsLogs/multiProcessCI.txt
+        - build/multi_process.out texts/verybigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/multiProcessCI.txt
+        - build/multi_process.out texts/bigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/multiProcessCI.txt
+        - diff logs/stressTestsLogs/oneProcessCI.txt logs/stressTestsLogs/multiProcessCI.txt >> logs/stressTestsLogs/diffResultCI.txt

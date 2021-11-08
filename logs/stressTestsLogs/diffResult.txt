@@ -1,0 +1,16 @@
+6c6
+< Time-run of the program: 14 
+---
+> Time-run of the program: 7 
+13c13
+< Time-run of the program: 1 
+---
+> Time-run of the program: 0 
+24c24
+< Time-run of the program: 28 
+---
+> Time-run of the program: 13 
+35c35
+< Time-run of the program: 2 
+---
+> Time-run of the program: 1 
