@@ -2,8 +2,9 @@
 #include <time.h>
 
 int main(int argc, char *argv[]) {
-    time_t start;
-    start = time(NULL);
+    // раскомментировать, если нужно засечь время
+    /*time_t start;
+    start = time(NULL);*/
     if (argc < 2) {
         printf("File path not mentioned\n");
         exit(0);
@@ -26,9 +27,10 @@ int main(int argc, char *argv[]) {
         free(sequenceArray[i]);
     }
     free(sequenceArray);
-    time_t end;
+    // раскомментировать, если нужно засечь время
+    /*time_t end;
     end = time(NULL);
     printf("Time-run of the program: %ld"
-           " \n--------------------------------\n", end-start);
+           " \n--------------------------------\n", end-start);*/
     return 0;
 }
