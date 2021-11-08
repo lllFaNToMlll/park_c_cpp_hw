@@ -50,12 +50,12 @@ jobs:
         - chmod +x textMaker.sh
         - sh textMaker.sh
         - cd ..
-        - build/one_process.out texts/verybigfile.txt ga ma ke mb >> logs/stressTestsLogs/oneProcess.txt
-        - build/one_process.out texts/bigfile.txt ga ma ke mb >> logs/stressTestsLogs/oneProcess.txt
-        - build/one_process.out texts/verybigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/oneProcess.txt
-        - build/one_process.out texts/bigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/oneProcess.txt
-        - build/multi_process.out texts/verybigfile.txt ga ma ke mb >> logs/stressTestsLogs/multiProcess.txt
-        - build/multi_process.out texts/bigfile.txt ga ma ke mb >> logs/stressTestsLogs/multiProcess.txt
-        - build/multi_process.out texts/verybigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/multiProcess.txt
-        - build/multi_process.out texts/bigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/multiProcess.txt
-        - diff logs/stressTestsLogs/oneProcess.txt logs/stressTestsLogs/multiProcess.txt >> logs/stressTestsLogs/diffResult.txt
+        - build/one_process.out texts/verybigfile.txt ga ma ke mb >> logs/stressTestsLogs/oneProcessCI.txt
+        - build/one_process.out texts/bigfile.txt ga ma ke mb >> logs/stressTestsLogs/oneProcessCI.txt
+        - build/one_process.out texts/verybigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/oneProcessCI.txt
+        - build/one_process.out texts/bigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/oneProcessCI.txt
+        - build/multi_process.out texts/verybigfile.txt ga ma ke mb >> logs/stressTestsLogs/multiProcessCI.txt
+        - build/multi_process.out texts/bigfile.txt ga ma ke mb >> logs/stressTestsLogs/multiProcessCI.txt
+        - build/multi_process.out texts/verybigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/multiProcessCI.txt
+        - build/multi_process.out texts/bigfile.txt ga ma ke mb ff wqw ssd gg >> logs/stressTestsLogs/multiProcessCI.txt
+        - diff logs/stressTestsLogs/oneProcessCI.txt logs/stressTestsLogs/multiProcessCI.txt >> logs/stressTestsLogs/diffResultCI.txt
